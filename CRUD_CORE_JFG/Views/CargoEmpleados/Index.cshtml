@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CRUD_CORE_JFG.Clases.CargoEmpleadoDetalle>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Cargo Empleados</h1>
+
+<form asp-action="Index" method="post">
+    <div class="form-actions no-color">
+        <p>
+            Filtro: <input type="text" name="busqueda" value="" />
+            <input type="submit" value="Buscar" class="btn btn-primary" />
+            <a asp-action="Index">Todos los registros</a>
+        </p>
+    </div>
+</form>
+
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Cargo)
+            </th>
+            <th>
+                <a asp-action="CrearEditar" class="btn btn-outline-success"><i class="fas fa-users"></i> Crear Cargo</a>
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <i class="fas fa-users"></i> @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    <a asp-action="CrearEditar" asp-route-id="@item.IdCargo"><i class="far fa-edit"></i>Editar</a> |
+                    <a asp-action="Eliminar" asp-route-id="@item.IdCargo" class="text-danger m1-1" onclick="return confirm ('Deseas eliminar este registro?')"><i class="fa fa-trash-alt fa-lg"></i>Eliminar</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
