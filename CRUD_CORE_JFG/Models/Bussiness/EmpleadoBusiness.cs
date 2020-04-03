@@ -23,15 +23,16 @@ namespace CRUD_CORE_JFG.Models.Bussiness
         public async Task<IEnumerable<EmpleadoDetalle>> obtenerEmpleadosTodos()
         {
             //return await _context.Empleados.ToListAsync();
-
             await using (_context)
             {
+       
                 IEnumerable<EmpleadoDetalle> listaEmpleadoDetalles =
                 (from empleado in _context.Empleados
                  join cargo in _context.CargoEmpleados
                  on empleado.Cargo equals
                  cargo.IdCargo
-                 select new EmpleadoDetalle
+
+                 select new EmpleadoDetalle                       
                  {
                      IdEmpleado = empleado.IdEmpleado,
                      Nombre = empleado.Nombre,
@@ -39,7 +40,10 @@ namespace CRUD_CORE_JFG.Models.Bussiness
                      Telefono = empleado.Telefono,
                      Documento = empleado.Documento
 
-                 }).ToList();
+                    
+
+                 }).ToList(); 
+                
                 return listaEmpleadoDetalles;
             }
         }
